@@ -1,7 +1,5 @@
-# Lance Mueller
-# July 21, 2016
-
 import requests
+import urllib3
 import sys
 import json
 from optparse import OptionParser
@@ -23,8 +21,8 @@ def get_md5(filename):
         print str(e)
 
 if __name__ == "__main__":
-    key = "<api_key_here>" # https://exchange.xforce.ibmcloud.com/settings/api
-    password ="<api_password_here>"
+    key = "<api_key_here>" 
+    password ="password_here>"
 
     token = base64.b64encode(key + ":" + password)
     headers = {'Authorization': "Basic " + token, 'Accept': 'application/json'}
@@ -32,21 +30,24 @@ if __name__ == "__main__":
 
 
     parser = OptionParser()
-    parser.add_option("-u", "--url", dest="s_url", default=None, 
-                      help="URL to be checked by Exchange IBM Xforce", metavar="scanurl")
-    parser.add_option("-l", "--malwareurl", dest="m_url", default=None, 
-                      help="Returns the malware associated with the entered URL", metavar="scanurl")
-    parser.add_option("-f", "--file", dest="malfile" , default=None,
-                      help="file (md5 hash) to be checked by Exchange IBM Xforce", metavar="filename")
-    parser.add_option("-m", "--md5", dest="hash" , default=None,
-                      help="hash to be checked by Exchange IBM Xforce", metavar="hashvalue")
-    parser.add_option("-x", "--xfid", dest="s_xfid" , default=None,
-                      help="XFID to be used ", metavar="xfid")
-    parser.add_option("-c", "--cve", dest="s_cve" , default=None,
-                      help="CVE, BID, US-Cert, UV#, RHSA id to be searched ", metavar="cve-xxx-xxx")
+    
     parser.add_option("-i", "--ip", dest="s_ip" , default=None,
                       help="ip to be checked", metavar="ipaddress")
 (options, args) = parser.parse_args()
+
+
+if (options.s_ip is not None):
+    scanurl = options.s_ip
+    apiurl = url + "/ipr/"
+    send_request(apiurl, scanurl, headers)
+    apiurl = url + "/ipr/history/"
+    send_request(apiurl, scanurl, headers)
+    apiurl = url + "/ipr/malware/"
+    send_request(apiurl, scanurl, headers)
+
+
+if len(sys.argv[1:]) == 0:
+  parser.print_help()
 
 if ( options.s_url is not None ):
     apiurl = url + "/url/"
