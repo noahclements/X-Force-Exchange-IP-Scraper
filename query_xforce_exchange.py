@@ -18,9 +18,11 @@ password ="<password here>"
 
 token = base64.b64encode(key + ":" + password)
 headers = {'Authorization': "Basic " + token, 'Accept': 'application/json'}
-url = "https://api.xforce.ibmcloud.com:443"
+XForce_url = "https://api.xforce.ibmcloud.com:443"
  
-scanurl = raw_input("Enter an IP Address to scan")
+#scanurl = raw_input("Enter an IP Address to scan")
+URL_File = open('IPs.txt', 'r')
 
-apiurl = url + "/ipr/"
-send_request(apiurl, scanurl, headers)
+for url in URL_File:
+    apiurl = XForce_url + "/ipr/"
+    send_request(apiurl, url, headers)
