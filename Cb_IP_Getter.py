@@ -1,9 +1,8 @@
 import re
-import sys
 
-print("Input IP's from CB")
+ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', open('rawIPs.txt', 'r').read())
 
-IPs = open('IPs.txt', 'r')
-
-ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', IPs)
-print(*ip, sep='\n')
+file = open('cleanIPs.txt', 'w')
+for line in ip:
+    file.write(line + '\n')
+file.close()
