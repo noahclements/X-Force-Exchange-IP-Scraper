@@ -10,7 +10,8 @@ def send_request(apiurl, scanurl, headers):
     fullurl = apiurl +  scanurl
     response = requests.get(fullurl, params='', headers=headers, timeout=20)
     all_json = response.json()
-    print json.dumps(all_json, indent=4, sort_keys=True) 
+    print all_json['ip']
+    print all_json['score']
 
 
 key = "<api key here>" 
@@ -20,7 +21,6 @@ token = base64.b64encode(key + ":" + password)
 headers = {'Authorization': "Basic " + token, 'Accept': 'application/json'}
 XForce_url = "https://api.xforce.ibmcloud.com:443"
  
-#scanurl = raw_input("Enter an IP Address to scan")
 URL_File = open('IPs.txt', 'r')
 
 for url in URL_File:
