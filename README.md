@@ -1,4 +1,5 @@
 # X-Force Exchange IP Info Scraper
-When finished it will print out to a file the IP info w/ threat score and other stuff thats needed
+Takes IP's and outputs their X-Force Exchange risk score if its greater than 4.
+This was made to go through hundreds of DNS IP records in minutes rather than hours.
 
-uses python 2.7 currently, will be updated to 3 in future.
+Takes raw copied data from a text file that includes IP's, scrapes for just IP's, then calls the X-Force Exchange API to return the risk score of the IP.
