@@ -8,7 +8,6 @@ def send_request(apiurl, scanurl, headers):
     response = requests.get(fullurl, params='', headers=headers, timeout=20)
     all_json = response.json()
     score = int(all_json['score'])
-    print(score)
     if score > 4:
         ip = all_json['ip']
         print(ip)
