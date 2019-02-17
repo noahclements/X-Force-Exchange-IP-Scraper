@@ -26,8 +26,8 @@ for line in findIP:
 
 
 
-key = 'cb107d2f-c822-4aea-9644-fed6461be083'
-password = '252db6d0-063d-4207-a126-a78667ce7c70'
+key = '<api key here>'
+password = '<password here>'
 
 data_string = key + ":" + password
 data_bytes = data_string.encode('utf-8')
