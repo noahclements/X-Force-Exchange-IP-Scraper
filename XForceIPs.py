@@ -2,6 +2,7 @@ import requests
 import json
 import base64
 import re
+import ipaddress
 
 def send_request(apiurl, scanurl, headers, count):
     fullurl = apiurl +  scanurl
@@ -20,12 +21,13 @@ findIP = re.findall(r'[0-9]+(?:\.[0-9]+){3}', open('rawIPs.txt', 'r').read())
 
 ipList = []
 for line in findIP:
-   ipList.append(line)
+  if (ipaddress.ip_address(line).is_private) == False:
+    ipList.append(line)
 
 
 
-key = '<api key here>'
-password = '<password here>'
+key = 'cb107d2f-c822-4aea-9644-fed6461be083'
+password = '252db6d0-063d-4207-a126-a78667ce7c70'
 
 data_string = key + ":" + password
 data_bytes = data_string.encode('utf-8')
@@ -36,6 +38,6 @@ XForce_url = "https://api.xforce.ibmcloud.com:443"
 
 count = 0
 for url in ipList:
-    count += 1
-    apiurl = XForce_url + "/ipr/"
-    send_request(apiurl, url, headers, count)
+  count += 1
+  apiurl = XForce_url + "/ipr/"
+  send_request(apiurl, url, headers, count)
