@@ -6,7 +6,7 @@ import ipaddress
 
 def send_request(apiurl, scanurl, headers, count):
     fullurl = apiurl +  scanurl
-    response = requests.get(fullurl, params='', headers=headers, timeout=20)
+    response = requests.get(fullurl, params='', headers=headers)
     all_json = response.json()
     score = int(all_json['score'])
     if score > 4:
