@@ -22,11 +22,12 @@ findIP = re.findall(r'[0-9]+(?:\.[0-9]+){3}', open('rawIPs.txt', 'r').read())
 ipList = []
 for line in findIP:
   if (ipaddress.ip_address(line).is_private) == False:
-    ipList.append(line)
+    if line not in ipList:
+      ipList.append(line)
 
 
 
-key = '<api key here>'
+key = '<key here>'
 password = '<password here>'
 
 data_string = key + ":" + password
