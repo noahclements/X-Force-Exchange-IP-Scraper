@@ -13,6 +13,8 @@ def send_request(apiurl, scanurl, headers, count):
         ip = all_json['ip']
         print(ip)
         print(score)
+    elif response.status_code == 404:
+      print("404 error")
     else:
         print("not a threat", count)
 
@@ -27,7 +29,7 @@ for line in findIP:
 
 
 
-key = '<key here>'
+key = '<api key here>'
 password = '<password here>'
 
 data_string = key + ":" + password
