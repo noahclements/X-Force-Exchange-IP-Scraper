@@ -13,8 +13,9 @@ def send_request(apiurl, scanurl, headers, count):
         score = int(all_json['score'])
         if score > 4:
             ip = all_json['ip']
-            print(ip)
-            print(score)
+            print(ip + "\n" + str(score))
+            with open("flaggedIPs.txt", "a") as flaggedIP:
+              flaggedIP.write(ip + "\n" + str(score) + "\n")
         else:
             print("not a threat", count)
     except requests.exceptions.HTTPError as err:
